@@ -1,6 +1,6 @@
-package dev.ronaldotavares.java21.building_blocks;
+package dev.ronaldotavares.java21._1_building_blocks;
 
-public class Literals {
+public class DataTypes {
     public static void main(String[] args) {
         testLiterals();
         testUnderscore();
