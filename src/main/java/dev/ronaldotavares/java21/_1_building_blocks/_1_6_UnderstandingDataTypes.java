@@ -1,6 +1,7 @@
 package dev.ronaldotavares.java21._1_building_blocks;
 
-public class DataTypes {
+public class _1_6_UnderstandingDataTypes {
+
     public static void main(String[] args) {
         testLiterals();
         testUnderscore();
@@ -12,6 +13,9 @@ public class DataTypes {
     }
 
     public static void testLiterals() {
+        //        long max = 3123456789;  // DOES NOT COMPILE
+        long max = 3123456789L;  // Now Java knows it is a long
+
         int testBinary = 0b10;
         int testOctal = 017;
         int testHex = 0xFF;
@@ -31,6 +35,24 @@ public class DataTypes {
         double reallyUgly = 1_2;   // Also compiles
         System.out.println("**testUnderscore**");
         System.out.println(reallyUgly);
+    }
+
+    private void reference(){
+        String greeting;
+        greeting = new String("How are you?");
+
+        String reference = "hello";
+        int len = reference.length();
+//        int bad = len.length(); // DOES NOT COMPILE
+
+//        int value = null;   // DOES NOT COMPILE
+        String name = null;
+    }
+
+    private void wrapper(){
+        int primitive = Integer.parseInt("123");
+        Integer wrapper = Integer.valueOf("123");
+//        System.out.println(Integer.valueOf("five")); // NumberFormatException
     }
 
     public static void testBoolean() {
