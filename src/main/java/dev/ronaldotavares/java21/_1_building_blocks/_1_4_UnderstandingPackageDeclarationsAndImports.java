@@ -7,6 +7,8 @@ package dev.ronaldotavares.java21._1_building_blocks;
 import dev.ronaldotavares.java21._1_building_blocks.packageb.ClassA;
 
 import java.util.*;
+import java.util.Date;
+import java.sql.*;
 
 // redundant imports because java.lang is always imported by default
 import java.lang.System;
