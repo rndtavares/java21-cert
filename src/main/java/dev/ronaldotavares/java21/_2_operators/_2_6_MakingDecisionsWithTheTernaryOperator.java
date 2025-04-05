@@ -26,17 +26,17 @@ public class _2_6_MakingDecisionsWithTheTernaryOperator {
         System.out.println(food2);
 
         int stripes = 7;  
-        System.out.print((stripes> 5) ? 21 : "Zebra");  
+        System.out.println((stripes> 5) ? 21 : "Zebra");  
 //        int animal = (stripes < 9) ? 3 : "Horse";  // DOES NOT COMPILE
 
         int sheep = 1;
         int zzz = 1;
         int sleep = zzz<10 ? sheep++ : zzz++;
-        System.out.print(sheep + "," + zzz);  // 2,1
+        System.out.println(sheep + "," + zzz);  // 2,1
 
         int sheep1 = 1;
         int zzz1 = 1;
         int sleep1 = sheep1 >=10 ? sheep1++ : zzz1++;
-        System.out.print(sheep1 + "," + zzz1);  // 1,2
+        System.out.println(sheep1 + "," + zzz1);  // 1,2
     }
 }
