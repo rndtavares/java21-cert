@@ -112,7 +112,7 @@ public class _3_1_CreatingDecisionMakingStatements {
 
 	private static void printIntegersGreaterThan5(Number number) {    
 		if (number instanceof Integer data && data.compareTo(5) > 0)
-			System.out.print(data); 
+			System.out.println(data); 
 	}
 	
 	private static void patternMatchingWithNull() {
@@ -141,24 +141,23 @@ public class _3_1_CreatingDecisionMakingStatements {
 
 	private static void printIntegerTwice(Number number) {
 		if (number instanceof Integer data)
-			System.out.print(data.intValue());    
+			System.out.println(data.intValue());    
 		// System.out.print(data.intValue());  // DOES NOT COMPILE 
 	}
 
 	private static void printOnlyIntegers(Number number) {    
 		if (!(number instanceof Integer data))       
 			return;    
-		System.out.print(data.intValue()); 
+		System.out.println(data.intValue()); 
 
 		if (!(number instanceof Integer data1))       
 			return;    
 		else       
-			System.out.print(data1.intValue()); 
+			System.out.println(data1.intValue()); 
 
 		if (number instanceof Integer data2)       
-			System.out.print(data2.intValue());    
+			System.out.println(data2.intValue());    
 		else       
 			return; 
-		}
 	}
 }
