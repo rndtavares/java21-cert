@@ -5,18 +5,18 @@ import java.util.List;
 
 public class _3_ReviewQuestions {
     public static void main(String[] args) {
-//        _1();
-//        _3();
-//        _5_printReptile(6);
-//        _6();
-//        _7(new int[]{1, 2});
-//        _8_printType(11);
+        _1();
+        _3();
+        _5_printReptile(6);
+        _6();
+        _7(new int[]{1, 2});
+        _8_printType(11);
         _9();
-//        new _11_Zoo().printLocation(_11_Zoo.Animal.MAMMAL);
-//        _12();
-//        _13_getHatSize(9f);
-//        _14();
-//        _15();
+        new _11_Zoo().printLocation(_11_Zoo.Animal.MAMMAL);
+        _12();
+        _13_getHatSize(9f);
+        _14();
+        _15();
     }
 
     private static void _1(){
