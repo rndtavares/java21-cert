@@ -5,6 +5,9 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+//import static zoo.A.TYPE;
+//import static zoo.B.TYPE; // DOES NOT COMPILE
+
 public class _5_5_AccessingStaticData {
     private static final int NUM_SECONDS_PER_MINUTE;
     private static final int NUM_MINUTES_PER_HOUR;
