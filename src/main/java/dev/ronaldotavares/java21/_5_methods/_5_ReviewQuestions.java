@@ -13,6 +13,8 @@ public class _5_ReviewQuestions {
 //        final Long song3 = 1;
         final double song4 = 1;
 //        final Double song5 = 1;
+//        int i = 9.0f;
+        double ii = 9.0f;
 
     }
     private static void _7(){
@@ -53,3 +55,4 @@ class Rope {
       rope2.play();
    }
 }
+
