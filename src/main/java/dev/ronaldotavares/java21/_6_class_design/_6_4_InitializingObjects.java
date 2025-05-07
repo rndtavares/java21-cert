@@ -143,5 +143,6 @@ class Okapi extends GiraffeFamily {
         new Okapi(1);
         System.out.println();
         new Okapi(2);
+        System.out.println();
     }
 }

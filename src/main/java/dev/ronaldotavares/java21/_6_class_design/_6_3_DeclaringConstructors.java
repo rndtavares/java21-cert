@@ -98,7 +98,7 @@ class Gopher {
 }
 
 class Animal1 {
-    private int age;
+    protected int age;
     public Animal1(int age) {
         super(); // Refers to constructor in java.lang.Object
         this.age = age;
@@ -111,6 +111,11 @@ class Zebra extends Animal1 {
     }
     public Zebra() {
         this(4); // Refers to constructor in Zebra with int argument
+    }
+
+    public static void main(String[] args) {
+        var zebra = new Zebra();
+        System.out.println(zebra.age);
     }
 }
 

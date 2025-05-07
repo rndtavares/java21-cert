@@ -120,7 +120,7 @@ abstract class Mammal662 {
 class Platypus extends Mammal662 {
     String chew() { return "yummy!"; }
     public static void main(String[] args) {
-        new Platypus();
+        new Platypus(); //yummy!
     }
 }
 

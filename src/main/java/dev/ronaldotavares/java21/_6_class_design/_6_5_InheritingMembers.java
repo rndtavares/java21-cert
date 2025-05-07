@@ -23,14 +23,14 @@ class Kangaroo extends Marsupial {
 }
 
 class Camel {
-    public int getNumberOfHumps() {
+    int getNumberOfHumps() {
         return 1;
     }
 }
 class BactrianCamel extends Camel {
-//    private int getNumberOfHumps() {  // DOES NOT COMPILE
-//        return 2;
-//    }
+    protected int getNumberOfHumps() {  // DOES NOT COMPILE
+        return 2;
+    }
 }
 
 class Rider {
@@ -85,6 +85,11 @@ class RhinocerosBeetle extends Beetle1 {
     private int getSize() {
         return 5;
     }
+
+    public static void main(String[] args) {
+        var rhinocerosBeetle = new RhinocerosBeetle();
+        System.out.println(rhinocerosBeetle.getSize()); // 5
+    }
 }
 
 class Bear {
@@ -107,6 +112,9 @@ class Panda extends Bear {
     }
     public static void main(String[] args) {
         eat();
+        sneeze();
+        new Panda().hibernate();
+        laugh();
     }
 }
 

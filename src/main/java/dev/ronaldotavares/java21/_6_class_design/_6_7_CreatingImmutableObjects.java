@@ -79,12 +79,12 @@ final class Animal_6_7_v2 { // Not an immutable object declaration
     }
 }
 
-final class Animal_6_7_v3 { // Not an immutable object declaration
+final class Animal_6_7_v3 {
     private final ArrayList<String> favoriteFoods;
     public Animal_6_7_v3(ArrayList<String> favoriteFoods) {
         if (favoriteFoods == null || favoriteFoods.size() == 0)
             throw new RuntimeException("favoriteFoods is required");
-//        this.favoriteFoods = favoriteFoods;
+        //this.favoriteFoods = favoriteFoods;
         this.favoriteFoods = new ArrayList<String>(favoriteFoods);
     }
     public int getFavoriteFoodsCount() {
