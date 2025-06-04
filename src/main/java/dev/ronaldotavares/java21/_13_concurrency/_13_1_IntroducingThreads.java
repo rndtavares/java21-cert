@@ -7,11 +7,11 @@ public class _13_1_IntroducingThreads {
         System.out.println("Introducing Threads");
 
         var introducingThreads = new _13_1_IntroducingThreads();
-//        introducingThreads.platformThreadsExample(); //OOM error occours
+//        introducingThreads.platformThreadsExample(); //out of memory (OOM) error occours
         introducingThreads.threadConcurrency();
         introducingThreads.creatingThreads();
         introducingThreads.daemonThreads();
-        introducingThreads.interrupt();
+//        introducingThreads.interrupt();
     }
 
     void platformThreadsExample() {
@@ -145,11 +145,13 @@ class Zoo {
             Thread.sleep(10_000); // Wait for 10 seconds
         } catch (InterruptedException e) {
         }
-        System.out.println("Thread finished!");
+        System.out.println("Deamon example - Thread finished!");
     }
 
     public static void main(String[] args) {
-        var job = Thread.ofPlatform().daemon(Boolean.getBoolean(args[0])).start(Zoo::pause);
+        var daemon = Boolean.valueOf(args[0]);
+        System.out.println("Daemon example - daemon: " + daemon);
+        var job = Thread.ofPlatform().daemon(daemon).start(Zoo::pause);
         System.out.println("Main method finished!");
     }
 }
