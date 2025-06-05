@@ -11,7 +11,7 @@ public class _13_1_IntroducingThreads {
         introducingThreads.threadConcurrency();
         introducingThreads.creatingThreads();
         introducingThreads.daemonThreads();
-//        introducingThreads.interrupt();
+        introducingThreads.interrupt();
     }
 
     void platformThreadsExample() {
@@ -85,7 +85,7 @@ public class _13_1_IntroducingThreads {
         });
         thread.interrupt();
 
-        var thread1 = Thread.ofPlatform().start(() -> {
+        var thread1 = Thread.ofPlatform().daemon(true).start(() -> {
             while(true) {
                 if(Thread.interrupted())
                     System.out.println("Someone interrupted us!");
