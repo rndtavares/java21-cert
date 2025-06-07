@@ -1,5 +1,7 @@
 package dev.ronaldotavares.java21._13_concurrency;
 
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
@@ -17,6 +19,7 @@ public class _13_3_WritingThreadSafeCode {
         writingThreadSafeCode.improvingAccessWithSynchronizedBlocks();
         writingThreadSafeCode.synchronizingMethods();
         writingThreadSafeCode.understandingTheLockFramework();
+        writingThreadSafeCode.orchestratingTasksWithACyclicBarrier();
     }
 
     void understandingThreadSafety() {
@@ -158,6 +161,14 @@ public class _13_3_WritingThreadSafeCode {
 //        lock.readLock().lock();
 //        lock.writeLock().lock(); // Wait forever, read lock cannot be upgraded to a write lock, must release first
     }
+
+    void orchestratingTasksWithACyclicBarrier(){
+        System.out.println("Orchestrating Tasks with a Cyclic Barrier");
+
+        LionPenManager.main(null);
+
+        LionPenManagerCyclicBarrier.main(null);
+    }
 }
 
 class SheepManager {
@@ -218,5 +229,52 @@ class SynchronizedSheepManager {
 //    }
     static synchronized void dance() {
             System.out.print("Time to dance!");
+    }
+}
+
+class LionPenManager {
+    private void removeLions() { System.out.println("Removing lions"); }
+    private void cleanPen() { System.out.println("Cleaning the pen"); }
+    private void addLions() { System.out.println("Adding lions"); }
+    public void performTask() {
+        removeLions();
+        cleanPen();
+        addLions();
+    }
+    public static void main(String[] args) {
+        System.out.println("LionPenManager");
+        try (var service = Executors.newFixedThreadPool(4)) {
+            var manager = new LionPenManager();
+            for (int i = 0; i < 4; i++)
+                service.submit(() -> manager.performTask());
+        }
+    }
+}
+
+class LionPenManagerCyclicBarrier {
+    private void removeLions() { System.out.println("Removing lions"); }
+    private void cleanPen() { System.out.println("Cleaning the pen"); }
+    private void addLions() { System.out.println("Adding lions"); }
+    public void performTask(CyclicBarrier c1, CyclicBarrier c2) {
+        try {
+            removeLions();
+            c1.await();
+            cleanPen();
+            c2.await();
+            addLions();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            // Handle checked exceptions here
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println("LionPenManagerCyclicBarrier");
+        try (var service = Executors.newFixedThreadPool(4)) {
+            var manager = new LionPenManagerCyclicBarrier();
+            var c1 = new CyclicBarrier(4);
+            var c2 = new CyclicBarrier(4,
+                    () -> System.out.println("*** Pen Cleaned!"));
+            for (int i = 0; i < 4; i++)
+                service.submit(() -> manager.performTask(c1, c2));
+        }
     }
 }
