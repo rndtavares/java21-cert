@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class _14_2_OperatingOnFileAndPath {
 
-    String DEFAULT_PATH = "src/main/resources/io/";
+    public static final String DEFAULT_PATH = "src/main/resources/io/";
 
     public static void main(String[] args) {
         System.out.println("Operating on File and Path");
@@ -198,7 +198,7 @@ public class _14_2_OperatingOnFileAndPath {
     }
 
     void relativizingAPath() {
-        System.out.println();
+        System.out.println("Relativizing a Path");
 
         var path1 = Path.of("fish.txt");
         var path2 = Path.of("friendly/birds.txt");
@@ -423,7 +423,7 @@ public class _14_2_OperatingOnFileAndPath {
         try {
             System.out.println(Files.isSameFile(
                     Path.of(DEFAULT_PATH, "/animals/cobra"),
-                    Path.of(DEFAULT_PATH, "/animals/snake"))); //true
+                    Path.of(DEFAULT_PATH, "/animals/snake")));
         } catch (IOException e) {
             System.out.println(e);
         }
