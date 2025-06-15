@@ -1,6 +1,6 @@
 package dev.ronaldotavares.java21._2_operators;
 
-public class _2_1_UnderstandigJavaOperators {
+public class _2_1_UnderstandingJavaOperators {
 
     public static void main(String[] args) {
         differentOrders();
