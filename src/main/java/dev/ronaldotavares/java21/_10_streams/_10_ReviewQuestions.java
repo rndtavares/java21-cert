@@ -10,6 +10,7 @@ public class _10_ReviewQuestions {
         var reviewQuestions = new _10_ReviewQuestions();
         reviewQuestions._9();
         reviewQuestions._11();
+        reviewQuestions._21();
     }
 
     void _9(){
@@ -43,5 +44,15 @@ public class _10_ReviewQuestions {
                     .map(x -> "" + x)
                     .collect(Collectors.joining())
         );
+    }
+
+    void _21(){
+        System.out.println("21 - What is the output of the following?");
+        var spliterator = Stream.generate(() -> "x")
+                .spliterator();
+
+        spliterator.tryAdvance(System.out::print);
+        var split = spliterator.trySplit();
+        split.tryAdvance(System.out::print);
     }
 }

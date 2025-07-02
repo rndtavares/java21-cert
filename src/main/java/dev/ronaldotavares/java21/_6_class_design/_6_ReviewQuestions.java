@@ -5,6 +5,7 @@ public class _6_ReviewQuestions {
         _6();
         _8();
         _12();
+        _22();
     }
     private static void _6(){
         System.out.println("question 6");
@@ -17,6 +18,11 @@ public class _6_ReviewQuestions {
     private static void _12(){
         System.out.println("question 12");
         Beaver.main(null);
+    }
+
+    private static void _22(){
+        System.out.println("question 22");
+        Child.main(null);
     }
 }
 
@@ -89,3 +95,19 @@ class Beaver extends Rodent {
         }
     }
 }
+
+class Person {
+   static String name;
+   void setName(String q) { name = q; } }
+class Child extends Person {
+   static String name;
+   void setName(String w) { name = w; }
+   public static void main(String[] p) {
+      final Child m = new Child();
+      final Person t = m;
+      m.name = "Elysia";
+      t.name = "Sophia";
+      m.setName("Webby");
+      t.setName("Olivia");
+      System.out.println(m.name + " " + t.name);
+   } }

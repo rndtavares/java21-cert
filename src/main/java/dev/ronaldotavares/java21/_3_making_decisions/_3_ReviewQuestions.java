@@ -17,6 +17,7 @@ public class _3_ReviewQuestions {
         _13_getHatSize(9f);
         _14();
         _15();
+        _27();
     }
 
     private static void _1(){
@@ -167,6 +168,20 @@ public class _3_ReviewQuestions {
         List<Integer> parrots = new ArrayList<Integer>();
         for (var macaw  : parrots)
             System.out.println(macaw);
+    }
+
+    private static void _27(){
+        System.out.println("27 - What is printed by the following code snippet?");
+        byte amphibian = 2;
+        String name = "Salamander";
+        String color = switch (amphibian) {
+           case 1 -> { yield "Red"; }
+           case 2 -> { if (name.equals("Frog")) yield "Green";
+                       yield "Blue"; }
+           case 3 -> { yield "Purple"; }
+           default -> throw new RuntimeException();
+        };
+        System.out.print(color);
     }
 }
 

@@ -107,6 +107,7 @@ public class _4_4_UnderstandingArrays {
     }
     
     private static void comparing() {
+        System.out.println("comparing arrays");
         System.out.println(new int[] {1} == new int[] {1});                 // false 
         System.out.println(Arrays.equals(new int[] {1}, new int[] {1}));    // true
         System.out.println(Arrays.equals(new int[] {1}, new int[] {2}));    // false 
@@ -120,6 +121,7 @@ public class _4_4_UnderstandingArrays {
     }
 
     private static void mismatch() {
+        System.out.println("mismatch arrays");
         System.out.println(Arrays.mismatch(new int[] {1}, new int[] {1}));
         System.out.println(Arrays.mismatch(new String[] {"a"}, new String[] {"A"}));
         System.out.println(Arrays.mismatch(new int[] {1, 2}, new int[] {1}));
