@@ -1,5 +1,7 @@
 package dev.ronaldotavares.java21.questions;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PracticeQuestions {
@@ -7,6 +9,7 @@ public class PracticeQuestions {
         var practiceQuestions = new PracticeQuestions();
         practiceQuestions.concurrencyAtomicVsVolatileQuestion();
         practiceQuestions.enumValueOfQuestion();
+        practiceQuestions.streamReduceQuestion();
     }
 
     void concurrencyAtomicVsVolatileQuestion() {
@@ -32,6 +35,25 @@ public class PracticeQuestions {
                     lowercase string back to a Seasons enum value using Seasons.valueOf(enumString). 
                     Because the valueOf method expects the enum constant names to be in uppercase, an IllegalArgumentException 
                     is always thrown, and "INVALID," is printed for each enum value.
+                """);
+    }
+
+    void streamReduceQuestion() {
+        System.out.println("Q - What will be printed when the following STREAM code is executed?");
+        StreamReduce.main(null);
+        System.out.println("""
+                Explanation:
+                    The StreamReduce class initializes a list of strings items with the values "Candy" and "Gum". 
+                    The code then performs a reduce operation on a parallel stream.
+                    Here's a step-by-step breakdown:
+                    Inner reduce:
+                    It starts with an identity of "" (empty string).
+                    It concatenates all elements of the items list. The result of the inner reduce is "CandyGum".
+                    Outer reduce:
+                    The outer reduce now uses the items.parallelStream().reduce(...) as identity, which is "CandyGum"
+                    In parallel stream processing, identity is applied to multiple elements in the stream.
+                    So, it effectively does: "CandyGum" + "Candy" + "CandyGum" + "Gum".
+                    Therefore, the final output is "CandyGumCandyCandyGumGum".
                 """);
     }
 }
@@ -77,9 +99,9 @@ class EnumValueOf{
         static void processEnumValue(String enumString) {
             try {
                 Seasons enumValue = Seasons.valueOf(enumString);
-                System.out.println(enumValue + ",");
+                System.out.print(enumValue + ",");
             } catch (Exception e) {
-                System.out.println("INVALID,");
+                System.out.print("INVALID,");
             }
         }
 
@@ -93,5 +115,22 @@ class EnumValueOf{
         for (int i=0; i < Seasons.values().length; i++) {
             Seasons.processEnumValue(Seasons.values()[i].toString());
         }
+        System.out.println();
+    }
+}
+
+class StreamReduce {
+    public static void main(String[] args) {
+        List<String> items = Arrays.asList("Candy", "Gum");
+
+        var result = items.parallelStream()
+                .reduce(items.parallelStream()
+                                .reduce("",
+                                        (a, b) -> a + b,
+                                        (a, b) -> a + b),
+                        (a, b) -> a + b,
+                        (a, b) -> a + b);
+
+        System.out.println(result);
     }
 }
