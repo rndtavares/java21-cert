@@ -2,15 +2,19 @@ package dev.ronaldotavares.java21.questions;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ExamQuestions {
+public class PracticeQuestions {
     public static void main(String[] args) {
-        var examQuestions = new ExamQuestions();
-        examQuestions.concurrencyAtomicVsVolatileQuestion();
+        var practiceQuestions = new PracticeQuestions();
+        practiceQuestions.concurrencyAtomicVsVolatileQuestion();
     }
 
     void concurrencyAtomicVsVolatileQuestion() {
         System.out.println("What will be printed when the following code is executed?");
         ConcurrencyAtomicVsVolatile.main(null);
+        System.out.println("""
+                Explanation:
+                    Because volatileCounter++ is not atomic, it's possible (though less likely with such small loop counts) to see interleaved and potentially incorrect results for volatileCounter. AtomicInteger guarantees atomic increments, so atomicCounter will always be correct.
+                """);
     }
 }
 
