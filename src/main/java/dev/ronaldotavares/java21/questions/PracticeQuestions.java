@@ -14,6 +14,7 @@ public class PracticeQuestions {
         practiceQuestions.stringComparisonQuestion();
         practiceQuestions.virtualThreadsQuestion();
         practiceQuestions.moduleVisibilityQuestion();
+        practiceQuestions.nestedLoopQuestion();
     }
 
     void concurrencyAtomicVsVolatileQuestion() {
@@ -130,6 +131,22 @@ public class PracticeQuestions {
                             Correct answers: B, C and E.
                             """);
     }
+
+    void nestedLoopQuestion() {
+        System.out.println("Q - What will be the final value of 'result' after the following code is executed?");
+        NestedLoop.main(null);
+        System.out.println("""
+                Explanation:
+                    The outer loop iterates from i = 0 to 2 (3 iterations). The inner loop iterates from j = 3 to 0 (4 iterations).
+                    If i is equal to 1, the 'continue outerLoop;' statement skips the rest of the inner loop
+                    and continues with the next iteration of the outer loop. Otherwise, the sum of i and j is added to the result.
+                    - When i = 0, result += 0 + 2 + 0 + 1 + 0 + 0 + 0 + (-1) = 2
+                    - When i = 1, i is incremented by 1, so i = 2 and the inner loop is skipped.
+                    - The first statement evaluated in the for loop is the increment of i, which is now 3, so the loop condition is
+                    evaluated to false and the outer loop ends and so the execution.
+                    The final result is 2.
+                """);
+    }
 }
 
 class ConcurrencyAtomicVsVolatile {
@@ -224,5 +241,24 @@ class StringComparison {
         System.out.println(s1.equals(s3));
         System.out.println(s2 == s3);
         System.out.println(s2.equals(s3));
+    }
+}
+
+class NestedLoop {
+    public static void main(String[] args) {
+        int result = 0;
+        outerLoop:
+        for (int i = 0; i < 3; i++) {
+            int j = 3;
+            while (j >= 0) {
+                j--;
+                if (i == 1) {
+                    i++;
+                    continue outerLoop;
+                }
+                result += i + j;
+            }
+        }
+        System.out.println(result);
     }
 }
