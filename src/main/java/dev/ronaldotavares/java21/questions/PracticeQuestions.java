@@ -1,5 +1,10 @@
 package dev.ronaldotavares.java21.questions;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,6 +20,8 @@ public class PracticeQuestions {
         practiceQuestions.virtualThreadsQuestion();
         practiceQuestions.moduleVisibilityQuestion();
         practiceQuestions.nestedLoopQuestion();
+        practiceQuestions.tryWithResourcesQuestion();
+        practiceQuestions.localeNYDaylightSavingQuestion();
     }
 
     void concurrencyAtomicVsVolatileQuestion() {
@@ -147,6 +154,43 @@ public class PracticeQuestions {
                     The final result is 2.
                 """);
     }
+
+    void tryWithResourcesQuestion() {
+        System.out.println("Q - What will be printed when the following TRY WITH RESOURCES code is executed?");
+        try {
+            TryWithResources.main(null);
+        } catch (Exception e){
+            System.out.println(e);
+            for(Throwable suppressed : e.getSuppressed()) {
+                System.out.println("Suppressed: " + suppressed);
+            }
+        }
+        System.out.println("""
+                Explanation:
+                    In this scenario, `resource1` is declared outside the try-with-resources block and is only referenced within the try block.
+                    This is fine because a variable used as a try-with-resources resource should be final or effectively final.
+                    Both `resource1` and `resource2` throw exceptions in their `operation()` and `close()` methods.
+                    The exception thrown by `resource1.operation()` is not caught by the catch block because the thrown exception was a RuntimeException
+                    and the exception in the catch block is an IOException.
+                    The exceptions thrown by `resource2.close()` and `resource1.close()` respectively are suppressed and added to the suppressed exceptions of the exception throwed.
+                    The TryWithResources's catch block is never executed.
+                    The tryWithResourcesQuestion's method catch block catches the RuntimeException thrown and print it and it's supressed IOExceptions 
+                """);
+    }
+
+    void localeNYDaylightSavingQuestion() {
+        System.out.println("Q - What will be printed when the following LOCALE code is executed?");
+        LocaleNYDaylightSaving.main(null);
+        System.out.println("""
+                Explanation:
+                    The code creates two ZonedDateTime objects, zdt1 and zdt2, zdt1 is initialized to November 2, 2025, at 01:00 AM in the America/New_York time zone.
+                    The code then adds one hour to zdt1, resulting in zdt2.
+                    November 2, 2025, is the date when daylight saving time ends in the America/New_York time zone.
+                    At 2:00 AM, the clock is turned backward to 1:00 AM.
+                    Therefore, adding one hour to 01:00 AM on that date results in 01:00 AM due to the DST transition.
+                    The code compares the hour of zdt1 (01) with the hour of zdt2 (01). Since 01 is equal to 01, the output is true.
+                """);
+    }
 }
 
 class ConcurrencyAtomicVsVolatile {
@@ -260,5 +304,50 @@ class NestedLoop {
             }
         }
         System.out.println(result);
+    }
+}
+
+class MyResource implements AutoCloseable {
+    String resourceName;
+
+    public MyResource(String resourceName) {
+        this.resourceName = resourceName;
+    }
+
+    public void operation() {
+        System.out.println("operating " + resourceName);
+        throw new RuntimeException("Exception operating " + resourceName);
+    }
+
+    @Override
+    public void close() throws IOException {
+        System.out.println("closing " + resourceName);
+        throw new IOException("Exception closing " + resourceName );
+    }
+}
+
+class TryWithResources {
+    public static void main(String[] args) {
+        MyResource resource1 = new MyResource("r1");
+        try (resource1;
+             MyResource resource2 = new MyResource("r2")) {
+            resource1.operation();
+            resource2.operation();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getSuppressed().length);
+        }
+    }
+}
+
+class LocaleNYDaylightSaving {
+    public static void main(String[] args) {
+        ZoneId zone = ZoneId.of("America/New_York");
+        ZonedDateTime zdt1 = ZonedDateTime.of(LocalDateTime.of(2025, 11, 2, 1, 0), zone);
+        ZonedDateTime zdt2 = zdt1.plusHours(1);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z");
+        System.out.println("date 1 " + dateFormatter.format(zdt1));
+        System.out.println("date 2 " + dateFormatter.format(zdt2));
+        System.out.println(zdt1.getHour() == zdt2.getHour());
     }
 }
