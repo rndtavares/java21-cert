@@ -1,10 +1,14 @@
 package dev.ronaldotavares.java21.questions;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,6 +26,11 @@ public class PracticeQuestions {
         practiceQuestions.nestedLoopQuestion();
         practiceQuestions.tryWithResourcesQuestion();
         practiceQuestions.localeNYDaylightSavingQuestion();
+        practiceQuestions.overloadMethodQuestion();
+        practiceQuestions.switchPatternMatchingQuestion();
+        practiceQuestions.jImageQuestion();
+        practiceQuestions.ioBufferedWriterQuestion();
+
     }
 
     void concurrencyAtomicVsVolatileQuestion() {
@@ -191,6 +200,86 @@ public class PracticeQuestions {
                     The code compares the hour of zdt1 (01) with the hour of zdt2 (01). Since 01 is equal to 01, the output is true.
                 """);
     }
+
+    void overloadMethodQuestion() {
+        System.out.println("Q - What will be printed when the following OVERLOAD code is executed?");
+        Overload.main(null);
+        System.out.println("""
+                Explanation:
+                    The code defines a class Overload with overloaded methods.
+                    When Overload.main is executed, it calls the overloaded methods with different parameters.
+                    The method with the most specific matching parameter types will be called.
+                    The call method(1.0, 2.0) invokes the method(double... a) because java converts 1.0 and 2.0 to double by default.
+                    The call method(1, 2.0F) cause a compilation error because it is ambiguous. Both method(int,double) and method(float,float) match
+                    The call method(2.0F, 1) invokes the method(float a, float b) because java converts int to float by default.
+                """);
+    }
+
+    void switchPatternMatchingQuestion() {
+        System.out.println("Q - What will be printed when the following SWITCH code is executed?");
+        SwitchPatternMatching.main(null);
+        System.out.println("""
+            Explanation:
+                The code defines a class SwitchPatternMatching with methods that uses switch expression and statement pattern matching.
+                The switch checks the type of the input object and performs different actions based on the type.
+                - If the input is null, it returns "wrong date".
+                - If the input is a LocalDate object and is in the future, it returns "future".
+                - If the input is a LocalDate object and is in the past, it returns "past".
+                - If the input is a LocalDate object and is equal to today, it returns "today".
+                - Otherwise, it returns "wrong date".
+                The main method calls switchExpressionPatternMatching and switchStatementPatternMatching methods 
+                with different inputs and prints the results.
+            """);
+    }
+
+    void jImageQuestion() {
+        System.out.println("""
+                Q - Which of the following can be stored in a JImage file?
+
+                A) Compiled Java class files (.class files)
+                B) Resource files (.properties, .txt, etc.)
+                C) Native libraries (.dll, .so, .dylib)
+                D) All of the above
+                """);
+
+        System.out.println("""
+                            Explanation:
+                            A) True - Compiled Java class files (.class files) can be stored in a JImage file.
+                            B) True - Resource files (.properties, .txt, etc.) can be stored in a JImage file.
+                            C) False - Native libraries (.dll, .so, .dylib) cannot be directly stored in a JImage file. 
+                            JImage is primarily for Java class files and resource files.
+                            Correct answer: A and B
+                            """);
+
+        System.out.println("""
+                JImage is a tool and file format in Java used for storing the modular runtime image. 
+                It's essentially an archive that contains compiled Java class files (.class files), 
+                resource files (.properties, .txt, etc.), and other necessary components for the Java runtime environment. 
+                It is not used to store native libraries (.dll, .so, .dylib).
+                """);
+    }
+
+    void ioBufferedWriterQuestion() {
+        System.out.println("Q - What will be the output of the following IO code?");
+        IOBufferedWriter.main(null);
+        System.out.println("""
+                Explanation:
+                    The code reads from `input.txt` and writes to `output.txt` using buffered streams.
+                    The output is `speedboatd` instead of `speedboat` because of the `write` method used in conjunction with the buffer size.
+                    The `IOBufferedWriter` class reads from `input.txt` and writes to `output.txt` using buffered streams. 
+                    The `input.txt` file contains the text "speedboat". 
+                    The `BufferedReader` reads the input in chunks of 5 characters due to `batchSize = 5`.
+                    The `while` loop reads the input in chunks:
+                    1.  First iteration: reads "speed"
+                    2.  Second iteration: reads "boatd"
+                    The `writer.write(buffer)` method writes the entire buffer content to the file. 
+                    Because the `input.txt` contains "speedboat" (length 9), the `reader.read` method in the second iteration reads "boatd". 
+                    The `writer.write(buffer)` then writes "boatd" to the file.
+                    Therefore, the final output in `output.txt` is "speedboatd".
+                    The `outputString` variable is used to read the content of `output.txt` after the writing is complete.
+                    The text block uses `String.format` to embed the value of `outputString` into the output.
+                """);
+    }
 }
 
 class ConcurrencyAtomicVsVolatile {
@@ -349,5 +438,106 @@ class LocaleNYDaylightSaving {
         System.out.println("date 1 " + dateFormatter.format(zdt1));
         System.out.println("date 2 " + dateFormatter.format(zdt2));
         System.out.println(zdt1.getHour() == zdt2.getHour());
+    }
+}
+
+class Overload {
+    static void method(int a, int b) {
+        System.out.println("int, int");
+    }
+
+    static void method(int a, double b) {
+        System.out.println("int, double");
+    }
+
+    static void method(float a, float b) {
+        System.out.println("float, float");
+    }
+
+    static void method(double... a) {
+        System.out.println("double...");
+    }
+
+    public static void main(String[] args) {
+        method(1.0, 2.0);
+//        method(1, 2.0F); // This line will cause a compilation error because it is ambiguous.
+                        // Both method(int,double) and method(float,float) match
+        method(2.0F, 1);
+    }
+}
+
+class SwitchPatternMatching {
+
+    static String switchExpressionPatternMatching(Object obj) {
+        String result = "switchExpression ";
+        return switch (obj) {
+            case LocalDate l when l.isAfter(LocalDate.now()) -> result + "future";
+            //case null -> result + "wrong date"; // null case could be in any position
+            case LocalDate l when l.isBefore(LocalDate.now()) -> result + "past";
+//            case default -> result + "wrong date"; //default case must be the last case, otherwise, it dominates all other cases
+            case LocalDate l when l.isEqual(LocalDate.now()) -> result + "today";
+            case null, default -> result + "wrong date"; //null and default can be combined
+        };
+    }
+
+    static String switchStatementPatternMatching(Object obj) {
+        String result = "switchStatement ";
+        switch (obj) {
+            case null:
+                result += "wrong date";
+                break;
+            case LocalDate l when l.isAfter(LocalDate.now()):
+                result += "future";
+                break;
+            case LocalDate l when l.isBefore(LocalDate.now()):
+                result += "past";
+                break;
+            case LocalDate l when l.isEqual(LocalDate.now()):
+                result += "today";
+                break;
+            default:
+                result += "wrong date";
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(switchExpressionPatternMatching(null));
+        System.out.println(switchExpressionPatternMatching(LocalDate.now()));
+        System.out.println(switchExpressionPatternMatching(LocalDate.now().plus(1, ChronoUnit.DAYS)));
+        System.out.println(switchExpressionPatternMatching(LocalDate.now().plus(-1, ChronoUnit.DAYS)));
+
+        System.out.println(switchStatementPatternMatching(null));
+        System.out.println(switchStatementPatternMatching(LocalDate.now()));
+        System.out.println(switchStatementPatternMatching(LocalDate.now().plus(1, ChronoUnit.DAYS)));
+        System.out.println(switchStatementPatternMatching(LocalDate.now().plus(-1, ChronoUnit.DAYS)));
+    }
+}
+
+class IOBufferedWriter {
+    public static final String DEFAULT_PATH = "src/main/resources/io/practicequestion";
+    public static void main(String[] args) {
+        Path inputPath = Path.of(DEFAULT_PATH, "input.txt"); //input file with the text: speedboat
+        Path outputPath = Path.of(DEFAULT_PATH, "output.txt");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputPath.toFile()));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath.toFile()))) {
+
+            int batchSize = 5;
+            var buffer = new char[batchSize];
+            int lengthRead;
+            while ((lengthRead = reader.read(buffer, 0, batchSize)) > 0) {
+                writer.write(buffer);
+            }
+            writer.flush();
+
+            String outputString = Files.readString(outputPath);
+            System.out.println("""
+                                Output file text:
+                                %s
+                                """.formatted(outputString));
+        } catch (IOException e) {
+            System.err.println("An error occurred: " + e.getMessage());
+        }
     }
 }
