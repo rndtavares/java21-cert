@@ -30,6 +30,7 @@ public class PracticeQuestions {
         practiceQuestions.jImageQuestion();
         practiceQuestions.ioBufferedWriterQuestion();
         practiceQuestions.sequencedCollectionQuestion();
+        practiceQuestions.serializationQuestion();
 
     }
 
