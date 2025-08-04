@@ -9,8 +9,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PracticeQuestions {
@@ -25,11 +24,12 @@ public class PracticeQuestions {
         practiceQuestions.moduleVisibilityQuestion();
         practiceQuestions.nestedLoopQuestion();
         practiceQuestions.tryWithResourcesQuestion();
-        practiceQuestions.localeNYDaylightSavingQuestion();
+        practiceQuestions.localDateTimeNYDaylightSavingQuestion();
         practiceQuestions.overloadMethodQuestion();
         practiceQuestions.switchPatternMatchingQuestion();
         practiceQuestions.jImageQuestion();
         practiceQuestions.ioBufferedWriterQuestion();
+        practiceQuestions.sequencedCollectionQuestion();
 
     }
 
@@ -187,9 +187,9 @@ public class PracticeQuestions {
                 """);
     }
 
-    void localeNYDaylightSavingQuestion() {
-        System.out.println("Q - What will be printed when the following LOCALE code is executed?");
-        LocaleNYDaylightSaving.main(null);
+    void localDateTimeNYDaylightSavingQuestion() {
+        System.out.println("Q - What will be printed when the following LOCALDATETIME code is executed?");
+        LocalDateTimeNYDaylightSaving.main(null);
         System.out.println("""
                 Explanation:
                     The code creates two ZonedDateTime objects, zdt1 and zdt2, zdt1 is initialized to November 2, 2025, at 01:00 AM in the America/New_York time zone.
@@ -278,6 +278,49 @@ public class PracticeQuestions {
                     Therefore, the final output in `output.txt` is "speedboatd".
                     The `outputString` variable is used to read the content of `output.txt` after the writing is complete.
                     The text block uses `String.format` to embed the value of `outputString` into the output.
+                """);
+    }
+
+    void sequencedCollectionQuestion() {
+        System.out.println("Q - Which of the following implementations of SequencedCollection will produce the sequence: a, f, c, e, d?");
+        SequencedCollectionExample.main(null);
+        System.out.println("""
+                Explanation:
+                    The code initializes a list with the elements "c", "b", "a", "e", "d".
+                    It then performs operations on different SequencedCollection implementations.
+                    - TreeSet sorts the elements, so it will not produce the desired sequence.
+                    - LinkedHashSet maintains insertion order you can not change the order, it does not provide index base acess like List
+                    - ArrayList maintains insertion order and allows adding/removing elements at the beginning/end (not at index base in this case).
+                    - LinkedList maintains insertion order and allows adding/removing elements at the beginning/end .
+                    One important thing to remeber is that the reference type of all options is SequencedCollection<String>, 
+                    and only SequencedCollection methods can be used to change the elements (addFirst, addLast, removeFirst, removeLast),
+                    or methods in the Collection interface because SequencedCollection extends Collection (add, addAll, remove, removeAll, removeIf, clear).
+                    The correct option is ArrayList
+                """);
+    }
+
+    void serializationQuestion() {
+        System.out.println("Q - What will be the output of the following code after serializing and deserializing the object?");
+        SerializationExample.main(null);
+        System.out.println("""
+                Explanation:
+                    The code serializes an object of type `MyClass` to a file and then deserializes it back.
+                    Here's a breakdown of the output:
+
+                    Original object serialized: `MyClass{id=1, name='Test', age=25, count=1}`
+                    - `id`: 1 (This value is from the constructor of `MyClass`)
+                    - `name`: "Test" (Initialized in the constructor)
+                    - `age`: 25 (Initialized in the constructor and marked as transient, so it won't be serialized)
+                    - `count`: 1 (Static variable incremented in the constructor, static field also won't be serialized)
+
+                    Deserialized object: `MyClass{id=10, name='Test', age=0, count=2}`
+                    - `id`: 10 (The base class constructor without parameters is called during deserialization, initializing `id` to 10,
+                    remember that the default constructor of the first class in the hierarchy that does not implements Serializable is called
+                    and that the constructor of MyClass is not called during deserialization)
+                    - `name`: "Test" (Successfully serialized and deserialized)
+                    - `age`: 0 (Because `age` is `transient`, it's not serialized, and it defaults to 0)
+                    - `count`: 2 (Static variable `count` is not serialized. The value is incremented to 1 when the first 
+                    object is created and incremented to 2 when the second object is created, it's a class variable, so the last value will be printed)
                 """);
     }
 }
@@ -429,7 +472,7 @@ class TryWithResources {
     }
 }
 
-class LocaleNYDaylightSaving {
+class LocalDateTimeNYDaylightSaving {
     public static void main(String[] args) {
         ZoneId zone = ZoneId.of("America/New_York");
         ZonedDateTime zdt1 = ZonedDateTime.of(LocalDateTime.of(2025, 11, 2, 1, 0), zone);
@@ -539,5 +582,124 @@ class IOBufferedWriter {
         } catch (IOException e) {
             System.err.println("An error occurred: " + e.getMessage());
         }
+    }
+}
+
+class SequencedCollectionExample {
+    public static void main(String[] args) {
+        List<String> data = List.of("c", "b", "a", "e", "d");
+
+        // HashSet is not a sequenced collection
+//        SequencedCollection<String> hashSet = new HashSet<>(data);
+//        hashSet.remove("b");
+//        hashSet.add("f");
+//        System.out.println("HashSet: " + hashSet);
+
+        // TreeSet
+        SequencedCollection<String> treeSet = new TreeSet<>(data);
+        treeSet.removeFirst();
+//      treeSet does not support addLast/addFirst method, it always sorts the elements in natural order or by a specified comparator.
+//        treeSet.addLast("f");
+        System.out.println("TreeSet: " + treeSet);
+
+        // LinkedHashSet
+        SequencedCollection<String> linkedHashSet = new LinkedHashSet<>(data);
+        linkedHashSet.remove("b");
+        linkedHashSet.addFirst("f");
+        System.out.println("LinkedHashSet: " + linkedHashSet);
+
+        // ArrayList
+        SequencedCollection<String> arrayList = new ArrayList<>(data);
+        ArrayList<String> arrayList1 = new ArrayList<>(data);
+        arrayList.remove("a");
+        arrayList.addFirst("f");
+        arrayList.addFirst("a");
+        arrayList.remove("b");
+        System.out.println("ArrayList: " + arrayList);
+
+        // LinkedList
+        SequencedCollection<String> linkedList = new LinkedList<>(data);
+        linkedList.addLast("f");
+        linkedList.remove("b");
+        System.out.println("LinkedList: " + linkedList);
+    }
+}
+
+class MyBaseClass {
+    protected int id;
+
+    public MyBaseClass() {
+        this.id = 10;
+    }
+
+    public MyBaseClass(int id) {
+        this.id = id;
+    }
+}
+
+class MyClass extends MyBaseClass implements Serializable {
+    private String name;
+    private transient int age;
+    private static int count;
+
+    public MyClass(int id, String name, int age) {
+        super(id);
+        this.name = name;
+        this.age = age;
+        count++;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    @Override
+    public String toString() {
+        return "MyClass{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", count=" + count +
+                '}';
+    }
+}
+
+class SerializationExample {
+    public static final String DEFAULT_PATH = "src/main/resources/io/practicequestion";
+    public static void main(String[] args) {
+        MyClass obj1 = new MyClass(1,"Test", 25);
+        String filename = DEFAULT_PATH + "/serialized.txt";
+
+        // Serialization
+        try (FileOutputStream file = new FileOutputStream(filename);
+             ObjectOutputStream out = new ObjectOutputStream(file)) {
+            out.writeObject(obj1);
+            System.out.println("Original object serialized: " + obj1);
+        } catch (IOException ex) {
+            System.out.println("IOException is caught: " + ex.getMessage());
+        }
+
+        MyClass obj2 = new MyClass(2,"New Test", 50);
+
+        // Deserialization
+        MyClass deserializedObj = null;
+        try (FileInputStream file = new FileInputStream(filename);
+             ObjectInputStream in = new ObjectInputStream(file)) {
+            deserializedObj = (MyClass) in.readObject();
+            System.out.println("Deserialized object: " + deserializedObj);
+        } catch (IOException ex) {
+            System.out.println("IOException is caught: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println("ClassNotFoundException is caught: " + ex.getMessage());
+        }
+
     }
 }
