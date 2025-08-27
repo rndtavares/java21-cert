@@ -42,6 +42,13 @@ public class _2_5_ComparingValues {
         Integer zooTime = Integer.valueOf(9);
         Number num = zooTime;
         Object obj = zooTime;
+        System.out.println(zooTime instanceof Object);   // true
+        System.out.println(zooTime instanceof Number);   // true
+        System.out.println(num instanceof Object);   // true
+        System.out.println(num instanceof Integer);   // true
+        System.out.println(obj instanceof Integer);  // true
+        System.out.println(obj instanceof Number);  // true
+
 
         openZoo(1);
 
