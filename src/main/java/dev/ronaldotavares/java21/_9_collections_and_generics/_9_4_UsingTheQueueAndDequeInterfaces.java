@@ -50,6 +50,7 @@ public class _9_4_UsingTheQueueAndDequeInterfaces {
         System.out.println(stack.pop());   // 4
         System.out.println(stack.pop());   // 10
         System.out.println(stack.peek());  // null
+//        System.out.println(stack.pop());  // Exception
     }
 
 

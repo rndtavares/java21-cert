@@ -121,5 +121,9 @@ public class _10_3_WorkingWithPrimitiveStreams {
         if (stats.getCount() == 0) throw new RuntimeException();
         int j = stats.getMax() - stats.getMin();
         System.out.println(j);
+
+        IntSummaryStatistics intSummaryStatistics = IntStream.empty().summaryStatistics();
+        System.out.println(intSummaryStatistics.getMax());
+        System.out.println(intSummaryStatistics.getMin());
     }
 }
