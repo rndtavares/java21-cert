@@ -27,7 +27,7 @@ public class _4_4_UnderstandingArrays {
         int numAnimals5 [];
 
         int[] ids, types;
-//        int ids[], types; DOES NOT COMPILE
+        int ids1[], types1;
     }
     
     private static void creatingArrayOfReferenceVariables() {
