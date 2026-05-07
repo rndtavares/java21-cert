@@ -29,6 +29,13 @@ public class _10_2_UsingStreams {
                 1,             // seed
                 n -> n < 100,  // Predicate to specify when done
                 n -> n + 2);   // UnaryOperator to get next value
+
+        oddNumbers.limit(10).forEach(System.out::print);
+        System.out.println();
+        String output = oddUnder100
+                .map(n -> "" + n)
+                .collect(Collectors.joining(" "));
+        System.out.println(output);
     }
 
     private static void creatingParalelStreams(){

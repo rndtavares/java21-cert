@@ -21,6 +21,7 @@ public class _11_6_SupportingInternationalizationAndLocalization {
         supportingInternationalizationAndLocalization.parsingNumbers();
         supportingInternationalizationAndLocalization.formattingWithCompactNumberFormat();
         supportingInternationalizationAndLocalization.localizingDates();
+        supportingInternationalizationAndLocalization.categories();
     }
 
     void pickingALocale() {
@@ -155,5 +156,29 @@ public class _11_6_SupportingInternationalizationAndLocalization {
         LocalDateTime dateTime, Locale locale) {
         System.out.println(dtf.format(dateTime) + "---" 
         + dtf.withLocale(locale).format(dateTime));
+    }
+
+    void categories() {
+        System.out.println("categories");
+        var spain = Locale.of("es","ES");
+        var money = 1.23;
+
+        // Print with default locale
+        Locale.setDefault(Locale.of("en", "US"));
+        printCurrency(spain, money); // $1.23, Spanish
+
+        // Print with selected locale display
+        Locale.setDefault(Locale.Category.DISPLAY, spain);
+        printCurrency(spain, money); // $1.23, español
+
+        // Print with selected locale format
+        Locale.setDefault(Locale.Category.FORMAT, spain);
+        printCurrency(spain, money); // 1,23 €, español
+    }
+
+    public static void printCurrency(Locale locale, double money) {
+        System.out.println(
+                NumberFormat.getCurrencyInstance().format(money)
+                        + "," + locale.getDisplayLanguage());
     }
 }
