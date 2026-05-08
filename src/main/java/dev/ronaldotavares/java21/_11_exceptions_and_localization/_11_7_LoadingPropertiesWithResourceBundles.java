@@ -91,6 +91,7 @@ public class _11_7_LoadingPropertiesWithResourceBundles {
             System.out.println(props.getProperty("camel", "Bob")); // Bob
 
             System.out.println(props.get("open")); // 10am
+            System.out.println(props.get("camel")); // null
 //            props.get("open", "The zoo will be open soon"); // DOES NOT COMPILE
         }
     }
