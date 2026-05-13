@@ -23,6 +23,8 @@ public class _13_ReviewQuestions {
         reviewQuestions._12();
         reviewQuestions._13();
         reviewQuestions._19();
+        reviewQuestions._20();
+        reviewQuestions._23();
     }
 
     void _5() {
@@ -151,8 +153,79 @@ public class _13_ReviewQuestions {
     }
 
     void _19(){
-        System.out.println("19. What is the result of executing the following application? (Choose all that apply.)");
+        System.out.println("""
+         19. What is the result of executing the following application? (Choose all that apply.)
+         A. It compiles and outputs the two numbers followed by Printed.
+         B. The code will not compile because of line b1.
+         C. The code will not compile because of line b2.
+         D. The code will not compile because of line b3.
+         E. It compiles, but the output cannot be determined ahead of time.
+         F. It compiles but throws an exception at runtime.
+         G. It compiles but waits forever at runtime.
+         
+         Answers on the book and wiley, but they are WRONG: E, G
+         G is wrong because virtual threads are daemon threads, so an unclosed virtual-thread executor does not 
+         keep the JVM alive forever; this differs from traditional platform-thread executors, which can keep the 
+         application running if not shut down.
+         
+         So, the only correct answer is E, the question is a multiple choice question, what suggest you to answer more 
+         than one option, this question should be canceled
+         """);
+
+        class PrintConstants {
+            public static void main(String[] args) {
+                var s = Executors.newVirtualThreadPerTaskExecutor();
+                DoubleStream.of(3.14159, 2.71828)   // b1
+                        .forEach(c -> s.submit(          // b2
+                                () -> System.out.println(10 * c))); // b3
+                s.execute(() -> System.out.println("Printed"));
+            }
+        }
+
         PrintConstants.main(null);
+    }
+
+    private void _20() {
+        System.out.println("20");
+
+        class PrintCounter {
+            static int count = 0;
+            public static void main(String[] args) throws
+                    InterruptedException, ExecutionException {
+                try (var service = Executors.newSingleThreadExecutor()) {
+                    var r = new ArrayList<Future<?>>();
+                    IntStream.iterate(0,i -> i + 1).limit(5).forEach(
+//                            i -> r.add(service.execute(() -> {count++;})) // n1
+                            i -> r.add(service.submit(() -> {count++;})) // n1
+                    );
+                    for (Future<?> result : r) {
+                        System.out.print(result.get() + " "); // n2
+                    }
+                    System.out.println();
+                }
+            } }
+
+        try {
+            PrintCounter.main(null);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    private void _23() {
+        System.out.println("23");
+        class StockRoomTracker {
+            public static void await(CyclicBarrier cb) { // j1
+                try { cb.await(); } catch (Exception e) {}
+            }
+            public static void main(String[] args) {
+                var cb = new CyclicBarrier(10,
+                        () -> System.out.println("Stock Room Full!")); // j2
+//                IntStream.iterate(1, i -> 1).limit(9).parallel()
+                IntStream.iterate(1, i -> 1).limit(10).parallel()
+                        .forEach(i -> await(cb)); // j3
+            } }
+        StockRoomTracker.main(null);
     }
 
     public static void takeNap(long millis) {
@@ -161,15 +234,5 @@ public class _13_ReviewQuestions {
         } catch (InterruptedException e) {
             // ok
         }
-    }
-}
-
-class PrintConstants {
-    public static void main(String[] args) {
-        var s = Executors.newVirtualThreadPerTaskExecutor();
-        DoubleStream.of(3.14159, 2.71828)   // b1
-                .forEach(c -> s.submit(          // b2
-                        () -> System.out.println(10 * c))); // b3
-        s.execute(() -> System.out.println("Printed"));
     }
 }
