@@ -1,5 +1,6 @@
 package dev.ronaldotavares.java21._11_exceptions_and_localization;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -14,6 +15,7 @@ public class _11_ReviewQuestions {
         var reviewQuestions = new _11_ReviewQuestions();
         reviewQuestions._9();
         reviewQuestions._13();
+        reviewQuestions._18();
         reviewQuestions._25();
         reviewQuestions._26();
     }
@@ -46,6 +48,36 @@ public class _11_ReviewQuestions {
             System.out.println("try without catch");
         }finally {
             System.out.println("finally without catch");
+        }
+    }
+
+    void _18() {
+        System.out.println("18");
+
+        class FamilyCar {
+            static class Door implements AutoCloseable {
+                public void close() {
+                    System.out.print("D");
+                } }
+            static class Window implements Closeable {
+                public void close() {
+                    System.out.print("W");
+                    throw new RuntimeException();
+                } }
+            public static void main(String[] args) {
+                var d = new Door();
+                try (d; var w = new Window()) {
+                    System.out.print("T");
+                } catch (Exception e) {
+                    System.out.print("E");
+                } finally {
+                    System.out.print("F");
+                } } }
+
+        try {
+            FamilyCar.main(null);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
