@@ -125,5 +125,10 @@ public class _14_6_InteractingWithUsers {
         } catch (IOException e) {
             System.out.println(e);
         }
+
+        var error = System.out.checkError(); //shows if System.out got a error (closed)
+        if (error) {
+            System.out.println("An error has occurred in the output stream");
+        }
     }
 }

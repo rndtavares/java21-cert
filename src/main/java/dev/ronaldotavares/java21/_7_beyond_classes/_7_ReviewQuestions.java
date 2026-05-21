@@ -1,15 +1,21 @@
 package dev.ronaldotavares.java21._7_beyond_classes;
 
+import dev.ronaldotavares.java21._7_beyond_classes.animal.Frog;
+
 public class _7_ReviewQuestions {
     public static void main(String[] args) {
         _13();
         _15();
+
+        var _7_ReviewQuestions = new _7_ReviewQuestions();
+        _7_ReviewQuestions._assessment_11();
     }
 
     private static void _15(){
         System.out.println("question 15:");
         Ghost.main(null);
     }
+
     private static void _13(){
         System.out.println("question 13:");
         try{
@@ -17,6 +23,24 @@ public class _7_ReviewQuestions {
         } catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    private void _assessment_11() {
+        System.out.println("question 11 from assessment test:");
+        Tadpole.main(null);
+    }
+
+}
+    // Tadpole.java
+class Tadpole extends Frog {
+    public static void main(String[] args) {
+        Tadpole t = new Tadpole();
+        t.ribbit();
+//        t.jump();
+        Frog f = new Tadpole();
+//        f.ribbit();
+//        f.jump();
+        System.out.println("Done");
     }
 }
 

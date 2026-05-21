@@ -9,6 +9,7 @@ public class _8_ReviewQuestions {
         var reviewQuestions = new _8_ReviewQuestions();
         reviewQuestions._12();
         reviewQuestions._26();
+        reviewQuestions._assessment_21();
     }
 
     void _12(){
@@ -25,6 +26,21 @@ public class _8_ReviewQuestions {
         Animals.main(null);
     }
 
+    void _assessment_21() {
+        System.out.println("Which of the following lines can fill in the blank to print true? (Choose all that apply.)");
+
+//        System.out.println(test(____________________________));
+//        System.out.println(test(i::equals(5))); //A
+//        System.out.println(test(i -> {i == 5;})); //B
+        System.out.println(test((i) -> i == 5)); //C
+//        System.out.println(test((int i) -> i == 5)); //D
+//        System.out.println(test((int i) -> {return i == 5;})); //E
+        System.out.println(test((i) -> {return i == 5;})); //F
+    }
+
+    private boolean test(Function<Integer, Boolean> b) {
+        return b.apply(5);
+    }
 
 }
 
