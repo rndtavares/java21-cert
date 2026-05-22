@@ -1,7 +1,10 @@
 package dev.ronaldotavares.java21._8_lambdas_and_functional_interfaces;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class _8_ReviewQuestions {
     public static void main(String[] args) {
@@ -10,6 +13,9 @@ public class _8_ReviewQuestions {
         reviewQuestions._12();
         reviewQuestions._26();
         reviewQuestions._assessment_21();
+
+        var practiceExam1 = reviewQuestions.new PracticeExam1();
+        practiceExam1._4();
     }
 
     void _12(){
@@ -42,6 +48,23 @@ public class _8_ReviewQuestions {
         return b.apply(5);
     }
 
+    class PracticeExam1{
+        public void _4(){
+            System.out.println("4 - Which line has the first compiler error?");
+
+            int length = 3;
+
+            for (int i = 0; i<3; i++) {
+                if (i%2 == 0) {
+                    Supplier<Integer> supplier = () -> length; // A
+                    System.out.println(supplier.get());        // B
+                } else {
+//                    Supplier<Integer> supplier = () -> i;      // C
+//                    System.out.println(supplier.get());        // D
+                }
+            }
+        }
+        }
 }
 
 enum Animals {
