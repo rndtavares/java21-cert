@@ -1,5 +1,6 @@
 package dev.ronaldotavares.java21._13_concurrency;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class _13_ReviewQuestions {
         reviewQuestions._19();
         reviewQuestions._20();
         reviewQuestions._23();
+
+        var practiceExam1 = reviewQuestions.new PracticeExam1();
+//        practiceExam1._17();
     }
 
     void _5() {
@@ -233,6 +237,32 @@ public class _13_ReviewQuestions {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             // ok
+        }
+    }
+
+    class PracticeExam1 {
+        void _17() {
+            System.out.println("17 - Which lambda expression can be inserted into the blank that would allow the code to compile?");
+
+            Executors
+                    .newSingleThreadExecutor()
+                    .submit(() -> {throw new Exception("PracticeExam1 - 17");});
+//                .execute(() -> {throw new Exception();});
+//                .execute(__________________);
+//                .execute(() -> System.out::println); //A
+//                .execute(() -> 10); //B
+//              .execute(() -> {throw new IOException();}); //C
+//               .execute(() -> 1 + Math.random()); //D
+//              .execute(() -> return 2); //E
+
+        /*
+        A. () -˃ System.out::println
+        B. () -˃ 10
+        C. () -˃ {throw new IOException();}
+        D. 1 + Math::random
+        E. () -˃ return 2
+        F. None of the above - right answer
+        */
         }
     }
 }

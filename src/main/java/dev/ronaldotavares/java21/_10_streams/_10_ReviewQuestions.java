@@ -1,5 +1,9 @@
 package dev.ronaldotavares.java21._10_streams;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -11,6 +15,9 @@ public class _10_ReviewQuestions {
         reviewQuestions._9();
         reviewQuestions._11();
         reviewQuestions._21();
+
+        var practiceExam1 = reviewQuestions.new PracticeExam1();
+        practiceExam1._25();
     }
 
     void _9(){
@@ -54,5 +61,25 @@ public class _10_ReviewQuestions {
         spliterator.tryAdvance(System.out::print);
         var split = spliterator.trySplit();
         split.tryAdvance(System.out::print);
+    }
+
+    class PracticeExam1 {
+        void _25(){
+            System.out.println("PracticeExam1 - 25");
+            Stream<String> s = Stream.empty();
+            Stream<String> s2 = Stream.empty();
+            Predicate<String> condition = b -> b.startsWith("c");
+            Map<Boolean, List<String>> p = s.collect(
+                    Collectors.partitioningBy(condition));
+//            Map<Boolean, List<String>> g = s2.collect(
+//                    Collectors.groupingBy(condition));
+//            System.out.println(p + " " + g);
+            System.out.println(p);
+
+            Function<String, Boolean> functionCondition = b -> b.startsWith("c");
+            Map<Boolean, List<String>> g = s2.collect(
+                    Collectors.groupingBy(functionCondition));
+            System.out.println(p + " " + g);
+        }
     }
 }
