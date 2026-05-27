@@ -9,6 +9,9 @@ public class _7_ReviewQuestions {
 
         var _7_ReviewQuestions = new _7_ReviewQuestions();
         _7_ReviewQuestions._assessment_11();
+
+        var practiceExam2 = new PracticeExam2();
+        practiceExam2._3();
     }
 
     private static void _15(){
@@ -76,3 +79,39 @@ class Weather {
             default -> System.out.println("missing data");
         }
     }  }
+
+class PracticeExam2 {
+    public void _3(){
+        System.out.println("Practice Exam 2 - Question 3");
+
+        class ColorLocal {
+            private int hue = 10;
+            private enum Range { HIGH, LOW; }
+            public class Shade {
+                public int hue = ColorLocal.this.hue;
+            }
+//            public static void main(String... lighting) {
+            public void main(String... lighting) {
+                var colorLocal = new ColorLocal(); // static members are not allowed in local classes
+                System.out.println("Local class: " + colorLocal.new Shade().hue);
+            }
+        }
+
+        new ColorLocal().main();
+        ColorNested.main();
+    }
+
+    class ColorNested {
+        private int hue = 10;
+        private enum Range { HIGH, LOW; }
+        public class Shade {
+            public int hue = ColorNested.this.hue;
+        }
+        public static void main(String... lighting) {
+//            System.out.println(new Shade().hue);
+            var practiceExam2 = new PracticeExam2();
+            var color = practiceExam2.new ColorNested();
+            System.out.println("Nested class: " + color.new Shade().hue);
+        }
+    }
+}
