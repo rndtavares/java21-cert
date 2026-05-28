@@ -14,6 +14,8 @@ public class _5_3_WorkingWithVarargs {
 
         run(11, 77); // 77
 
+        DogWalker.main(null);
+
 
     }
 
@@ -34,13 +36,18 @@ class VisitAttractions {
 
 class DogWalker {
     public static void walkDog(int start, int... steps) {
-        System.out.println(steps.length);
+        try {
+            System.out.println(steps.length);
+        }catch (Exception e) {
+            System.out.println(e);
+        }
     }
     public static void main(String[] args) {
+        System.out.println("DogWalker");
         walkDog(1); // 0
         walkDog(1, 2); // 1
         walkDog(1, 2, 3); // 2
         walkDog(1, new int[] {4, 5}); // 2
-//        walkDog(1, null); // Triggers NullPointerException in walkDog()
+        walkDog(1, null); // Triggers NullPointerException in walkDog()
     }
 }

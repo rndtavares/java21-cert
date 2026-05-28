@@ -4,6 +4,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
@@ -18,6 +19,12 @@ public class _11_ReviewQuestions {
         reviewQuestions._18();
         reviewQuestions._25();
         reviewQuestions._26();
+
+        try {
+            PracticeExam2.Bank.main(null);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     void _9(){
@@ -128,6 +135,24 @@ public class _11_ReviewQuestions {
 //        } catch (IllegalArgumentException | NumberFormatException e) {
         } catch (IllegalArgumentException | ClassCastException f) {
             System.out.println(f);
+        }
+    }
+}
+
+class PracticeExam2 {
+    record Bank(Locale locale) {
+        public void printBalance(String v) throws ParseException {
+            var n1 = NumberFormat.getCurrencyInstance(locale);
+            var n2 = NumberFormat.getCurrencyInstance();
+            var n3 = NumberFormat.getCompactNumberInstance();
+            var value = n1.parse(v);
+            var value2 = n2.format(value);
+            var value3 = n3.format(n1.parse(v));
+            System.out.printf("%s, %s", value2, value3);
+        }
+
+        public static void main(String[] ignore) throws Exception {
+            new Bank(Locale.US).printBalance("$7000.30");
         }
     }
 }
