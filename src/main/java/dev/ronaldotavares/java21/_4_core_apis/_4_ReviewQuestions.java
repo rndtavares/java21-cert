@@ -1,6 +1,8 @@
 package dev.ronaldotavares.java21._4_core_apis;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class _4_ReviewQuestions {
     public static void main(String[] args) {
@@ -11,6 +13,9 @@ public class _4_ReviewQuestions {
 
         var practiceExam1 = reviewQuestions.new PracticeExam1();
         practiceExam1._10();
+
+        var practiceExam3 = reviewQuestions.new PracticeExam3();
+        practiceExam3._1();
     }
     void _16(){
         System.out.println("16 - Which of these statements are true? (Choose all that apply.)");
@@ -121,6 +126,32 @@ public class _4_ReviewQuestions {
                 }
             }
             Triangle.main(null);
+        }
+    }
+
+    class PracticeExam3{
+        public void _1() {
+            System.out.println("Practice Exam 3 - Question 1");
+            List<Double> numbers = new ArrayList<>();
+            numbers.add(12.0);
+            numbers.add(3.14);
+            numbers.add(3.14);
+            numbers.add(2.718);
+            numbers.add(2.718);
+
+            Predicate<Double> pred =
+                    n -> Math.round(n) == (int) n.doubleValue();
+
+            System.out.println(12l == 12);
+            System.out.println(12l == 12.0d);
+            System.out.println(12l == 12.0f);
+            System.out.println(12 == 12.0d);
+            System.out.println(12 == 12.0f);
+            System.out.println(12d == 12.0f);
+
+            numbers.removeIf(pred);
+
+            System.out.println(numbers);
         }
     }
 }

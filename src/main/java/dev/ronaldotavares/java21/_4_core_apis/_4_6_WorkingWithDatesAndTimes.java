@@ -216,8 +216,7 @@ public class _4_6_WorkingWithDatesAndTimes {
         var date = LocalDate.of(2025, 5, 25);
         var period = Period.ofDays(1);
         var days = Duration.ofDays(1);
-
-        System.out.println(date.plus(period));   // 2025–05–26 
+        System.out.println(date.plus(period));   // 2025–05–26
 //        System.out.println(date.plus(days));     // Unsupported unit: Seconds
     }
 

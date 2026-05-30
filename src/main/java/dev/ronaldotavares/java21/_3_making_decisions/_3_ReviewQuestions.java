@@ -18,6 +18,9 @@ public class _3_ReviewQuestions {
         _14();
         _15();
         _27();
+
+        var practiceExam3 = new _3_ReviewQuestions().new PracticeExam3();
+        practiceExam3._4();
     }
 
     private static void _1(){
@@ -182,6 +185,30 @@ public class _3_ReviewQuestions {
            default -> throw new RuntimeException();
         };
         System.out.print(color);
+    }
+
+    class PracticeExam3 {
+        public void _4(){
+            getCarton("test");
+        }
+
+        private Integer getCarton(final String defaultFlavor) {
+            var iceCream = "mintChocolateChip";
+            var favorite = "cottonCandy";
+            final String backupChoice = "frenchVanilla";
+            switch(iceCream) {
+                default: case "A"+"Z" : return 21;
+//                case defaultFlavor: return -1;
+//                case "grape", case "butterPecan" : return 1;
+                case "banana", "cherry" : return 7;
+                case "": case "coffee": return 2;
+//                case favorite : return 9;
+//                case "vanilla" | "birthday" : return 3;
+                case backupChoice : return 24;
+            }
+//            return null;
+        }
+
     }
 }
 

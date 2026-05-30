@@ -111,3 +111,38 @@ class Child extends Person {
       t.setName("Olivia");
       System.out.println(m.name + " " + t.name);
    } }
+
+interface HasWater {
+    public boolean isBlue();
+    void wet();
+}
+interface IsSalty {
+    static final String color = "clear";
+    Boolean isBlue();
+    public void wet();
+}
+//interface IsSea extends HasWater, IsSalty {}
+//abstract public final class Ocean implements IsSalty {}
+abstract class Ocean implements IsSalty {
+    void test(){
+//        var aa = this.color();
+//        var aaa = super.color();
+        var a = IsSalty.color;
+    }
+}
+class Sea {
+    void test(){
+        var a = IsSalty.color;
+    }
+}
+
+interface I { static void m() {} }
+class D { static void n() {} }
+class C extends D implements I {
+    void test(){
+        I.m();    // OK
+//        C.m();    // does NOT compile
+        D.n();
+        C.n();
+    }
+}
