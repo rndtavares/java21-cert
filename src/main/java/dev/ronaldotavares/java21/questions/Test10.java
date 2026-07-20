@@ -7,17 +7,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-public class Teste10 {
+public class Test10 {
     public static void main(String[] args) {
-        var teste10 = new Teste10();
-        teste10._1();
-        teste10._12();
-        teste10._17();
-        teste10._18();
-        teste10._20();
-        teste10._49();
-        teste10._4();
-        teste10._30();
+        var test10 = new Test10();
+        test10._1();
+        test10._12();
+        test10._17();
+        test10._18();
+        test10._20();
+        test10._49();
+        test10._4();
+        test10._30();
     }
 
     void _1(){
