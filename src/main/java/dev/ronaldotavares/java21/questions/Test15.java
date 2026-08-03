@@ -1,6 +1,5 @@
 package dev.ronaldotavares.java21.questions;
 
-import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -141,6 +140,17 @@ public class Test15 {
     private void _45() {
         System.out.println("question 45");
         OuterWorld.main(null);
+    }
+
+    private void _7(){
+        System.out.println("question 7");
+//      Consider the following program :  class Test{   public static void main(String[] args){
+        short s = 10;   // 1
+//        char c = s;     // 2
+//        s = c;          // 3
+//        int i = c;
+//        c = (char)i;
+        // } }  Identify the correct statements.
     }
 }
 
