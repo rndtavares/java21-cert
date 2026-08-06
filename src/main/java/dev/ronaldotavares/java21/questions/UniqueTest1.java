@@ -2,6 +2,7 @@ package dev.ronaldotavares.java21.questions;
 
 import java.time.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class UniqueTest1 {
@@ -166,3 +167,27 @@ enum Coffee {
     }
 }
 //Which of the given code snippets will produce the following output: ESPRESSO:Very Strong, MOCHA:Bold, LATTE:Mild,
+
+class SuperClass {}
+class SubClass extends SuperClass {}
+
+class GenericsUse{
+    public static void main(String[] args) {
+        List<? super SuperClass> lista = new LinkedList<>();
+        lista.add(new SuperClass());
+        lista.add(new SubClass());
+        lista.add(null);
+
+        Object object = lista.get(0);
+
+        List<? extends SuperClass> listaEx = new LinkedList<>();
+//        List<? extends SuperClass> listaEx = List.of(new SuperClass(), new SubClass());
+//        listaEx.add(new SubClass());
+//        listaEx.add(new SuperClass());
+//        listaEx.add(new Object());
+        listaEx.add(null);
+
+        SuperClass superClass = listaEx.get(0);
+//        SubClass subClass = listaEx.get(0);
+    }
+}
