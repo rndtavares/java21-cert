@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BinaryOperator;
@@ -30,6 +33,7 @@ public class UniqueTest3 {
         uniqueTest3._43();
         uniqueTest3._45();
         uniqueTest3._46();
+        uniqueTest3._54();
     }
 
     private void _1() {
@@ -218,6 +222,11 @@ public class UniqueTest3 {
         System.out.println(average2);
     }
 
+    private void _54() {
+        System.out.println("question 54");
+        TestClassU3_54.main(null);
+    }
+
     private List<BookU3> getBooksByAuthor(String author) {
         return List.of(
                 new BookU3("978-0553566032", "The Bourne Identity", 9.99),
@@ -326,6 +335,55 @@ class LockThreadU3 extends Thread {
             } else {
                 System.out.println(getName() + " could not get lock. " + getState());
             }
+        }
+    }
+}
+
+class TestLockThreadU3 {
+    public static void main(String[] args) {
+        LockThreadU3 t1 = new LockThreadU3("t1");
+        LockThreadU3 t2 = new LockThreadU3("t2");
+        t1.start();
+        t2.start();
+    }
+}
+
+class ArrayTestU3 {
+    public static void main(String[] args) {
+//        var i[][]= { { 1, 2 }, { 1 }, { }, { 1, 2, 3 } } ;
+//        var i1[][] = new int[][]{ { 1, 2 }, { 1 }, { }, { 1, 2, 3 } } ;
+        var i2 = new int[][]{ { 1, 2 }, { 1 }, { }, { 1, 2, 3 } } ;
+    }
+}
+
+class TestClassU3_54 {
+    static ArrayList al = new ArrayList();
+
+    public static void main(String[] args) {
+        al.clear();
+        Runnable r = () -> {
+            for (int i = 0; i < 5000; i++) {
+                synchronized (al) {
+                    al.add(i);
+                }
+            }
+        };
+        Thread t1 = new Thread(r, "T1");
+        Thread t2 = new Thread(r, "T2");
+
+        ExecutorService es = Executors.newFixedThreadPool(2);
+        long start = System.nanoTime();
+        Future f1 = es.submit(t1);
+        Future f2 = es.submit(t2);
+        es.shutdown();
+        try {
+            f1.get();
+            f2.get();
+            long elapsedNanos = System.nanoTime() - start;
+            System.out.println(al);
+            System.out.println("elapsed ms: " + elapsedNanos / 1_000_000.0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
