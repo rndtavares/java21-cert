@@ -461,7 +461,8 @@ The community has hosted many special guests from the Java ecosystem, including:
         <img src="https://media.licdn.com/dms/image/v2/D4E22AQEmhCmFNj8jpg/feedshare-shrink_800/B4EZ5FIN8kIcAc-/0/1779276244982?e=2147483647&amp;v=beta&amp;t=4hsCMp1uWaTt4YqTSIATd09lyqO3fW8EdU5cnVci98g" alt="Nicolai Parlog session with the Java 21 certification study community" width="100%">
       </a>
       <br>
-      <strong><a href="https://lnkd.in/p/dHXsxeAa">Nicolai Parlog</a></strong>
+      <strong><a href="https://lnkd.in/p/dHXsxeAa">Nicolai Parlog</a></strong><br>
+      Java Developer Advocate
     </td>
   </tr>
 </table>
