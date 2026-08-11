@@ -27,6 +27,7 @@ public class UniqueTest4 {
         uniqueTest4._7();
         uniqueTest4._8();
         uniqueTest4._9();
+        uniqueTest4._10();
         uniqueTest4._11();
         uniqueTest4._13();
         uniqueTest4._15();
@@ -109,6 +110,11 @@ public class UniqueTest4 {
 //        module m2 { opens pkg; }
 //        module m3 { opens pkg to other.module; }
         System.out.println("Correct statements: open/opens allow reflection; modules are strongly encapsulated by default; modular jars can be used on classpath.");
+    }
+
+    private void _10() {
+        System.out.println("question 10");
+        new InitTestU4();
     }
 
     private void _11() {
@@ -278,6 +284,32 @@ sealed class WeekDayU4 permits MondayU4 {
 }
 
 non-sealed class MondayU4 extends WeekDayU4 {
+}
+
+class InitTestU4 {
+    static String s1 = sM1("a");
+
+    {
+        s1 = sM1("b");
+    }
+
+    static {
+        s1 = sM1("c");
+    }
+
+    static String s2 = sM1("a1");
+
+    {
+        s2 = sM1("b1");
+    }
+
+    static {
+        s2 = sM1("c1");
+    }
+    private static String sM1(String s) {
+        System.out.println(s);
+        return s;
+    }
 }
 
 class CalculatorU4 {
