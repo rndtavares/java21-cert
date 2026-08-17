@@ -15,6 +15,7 @@ public class Test16 {
         test16._20();
         test16._29();
         test16._42();
+        test16._43();
     }
 
     private void _4() {
@@ -78,6 +79,11 @@ public class Test16 {
         logger.logMsg("location1", "message1");
         logger.dumpLog();
 
+    }
+
+    private void _43() {
+        System.out.println("question 43");
+        TestClass16_43.main(null);
     }
 }
 
@@ -190,3 +196,55 @@ class ExtendsTest {
         B2 b2 = new B2();      // insert statement here
     }
 }
+
+class Writer16_43 {
+    private static final int LOOPSIZE = 5;
+
+    public synchronized void write(Data16_43... da) {
+        for (int i = 0; i < LOOPSIZE; i++) {
+            while (!da[0].own(this));
+            while (!da[1].own(this));
+            da[0].write();
+            da[1].write();
+            da[1].release();
+            da[0].release();
+        }
+    }
+}
+
+class Data16_43 {
+    private Writer16_43 writer;
+
+    public synchronized boolean own(Writer16_43 w) {
+        if (writer == null) {
+            writer = w;
+            return true;
+        }
+        return false;
+    }
+
+    public synchronized void release() {
+        writer = null;
+    }
+
+    public synchronized void write() {
+        System.out.println("writing by " + Thread.currentThread().getName());
+    }
+}
+
+class TestClass16_43 {
+    public static void main(String[] args) {
+        Writer16_43 w1 = new Writer16_43();
+        Writer16_43 w2 = new Writer16_43();
+
+        Data16_43 d1 = new Data16_43();
+        Data16_43 d2 = new Data16_43();
+
+        new Thread(() -> w1.write(d1, d2), "T1").start();
+        new Thread(() -> w2.write(d1, d2), "T2").start();
+
+        System.out.println("Subject to starvation, not deadlock or livelock.");
+    }
+}
+
+

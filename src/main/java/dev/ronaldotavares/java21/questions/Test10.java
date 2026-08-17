@@ -90,6 +90,7 @@ public class Test10 {
                     return f.apply((int)data); //4
                 }
             }
+//            rate++;
             Implement i = new Implement();
             return i.apply(payment);
         }

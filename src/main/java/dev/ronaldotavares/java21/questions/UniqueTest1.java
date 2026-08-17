@@ -1,9 +1,7 @@
 package dev.ronaldotavares.java21.questions;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class UniqueTest1 {
     public static void main(String[] args) {
@@ -131,25 +129,25 @@ class BaseU1 {
 class DerivedU1 extends BaseU1 {
     /*INSERT CODE HERE*/
 
-    public <Number> ArrayList<Number> transform(List<Number> list) {
-        return new ArrayList<Number>();
-    }
+//    public <Number> ArrayList<Number> transform(List<Number> list) {
+//        return new ArrayList<Number>();
+//    }
 
 //    public ArrayList<Object> transform(List<Object> list) {
 //        return new ArrayList<Object>();
 //    }
 //
-//    public <T> ArrayList<T> transform(List<T> list) {
-//        return new ArrayList<T>();
-//    }
+    public <T> ArrayList<T> transform(List<T> list) {
+        return new ArrayList<T>();
+    }
 //
 //    public <T> Collection<T> transform(List<T> list) {
 //        return new ArrayList<T>();
 //    }
 //
-//    public <T> Collection<T> transform(Collection<T> list) {
-//        return new HashSet<T>();
-//    }
+    public <T> Collection<T> transform(Collection<T> list) {
+        return new HashSet<T>();
+    }
 }
 //What can be inserted in the above code?
 
