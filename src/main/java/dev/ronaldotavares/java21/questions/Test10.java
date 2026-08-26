@@ -41,8 +41,9 @@ public class Test10 {
         var list1 = List.of(numA); //2
         var list2 = Collections.unmodifiableList(list1); //3
         var list3 = List.copyOf(Arrays.asList(numA));
+        var list4 = Arrays.asList(numA);
         numA[1] = 2; //4
-        System.out.println(list1+" "+list2+" "+list3+" "+Arrays.toString(numA));
+        System.out.println(list1+" "+list2+" "+list3+" "+list4+" "+Arrays.toString(numA));
 //        list2.stream().fla
     }
 
