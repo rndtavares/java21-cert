@@ -1488,7 +1488,6 @@ class SerializationExample {
         }
 
         MyClass obj2 = new MyClass(2,"New Test", 50);
-
         // Deserialization
         MyClass deserializedObj = null;
         try (FileInputStream file = new FileInputStream(filename);
