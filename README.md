@@ -469,9 +469,14 @@ The community has hosted many special guests from the Java ecosystem, including:
 
 The community is a complement to this repository: the repo provides the runnable code and examples, while the group provides discussion, accountability, weekly practice, and explanations in both languages.
 
+## My Articles About Java Certification
+
+- [Java Certification in 17 Months](https://ronaldotavares.dev/2026/08/31/1-java-certification-in-17-months/)
+- [How I Would Prepare for the OCP Java 21 Certification Today](https://ronaldotavares.dev/2026/09/07/how-i-would-prepare-for-the-ocp-java-21-certification-today/)
+- [The Importance of Getting the Java 21 Certification](https://ronaldotavares.dev/2025/03/18/the-importance-of-getting-the-java-21-certification/)
+
 ## Related Links
 
-- [The Importance of Getting the Java 21 Certification](https://ronaldotavares.dev/2025/03/18/the-importance-of-getting-the-java-21-certification/)
 - [Java 21 Certification Study Group](https://sendfox.com/ronaldotavares)
 - [OCP Oracle Certified Professional Java SE 21 Developer Study Guide: Exam 1Z0-830](https://www.amazon.com/Oracle-Certified-Professional-Developer-Study/dp/1394286619)
 
