@@ -3,25 +3,18 @@ package dev.ronaldotavares.java21.weekly;
 /** Code snippets for the Portuguese weekly meeting on September 29, 2026. */
 public class Portuguese20260929 {
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Use question1..question5 or reserve1..reserve2");
-            return;
-        }
-
-        switch (args[0]) {
-            case "question1" -> question1();
-            case "question2" -> question2();
-            case "question3" -> question3();
-            case "question4" -> question4();
-            case "question5" -> question5();
-            case "reserve1" -> reserve1();
-            case "reserve2" -> reserve2();
-            default -> System.out.println("Unknown question: " + args[0]);
-        }
+        question1();
+        question2();
+        question3();
+        question4();
+        question5();
+        reserve1();
+        reserve2();
     }
 
     // Main 1: arrow switch statement. Try changing x and compare with colon cases.
     private static void question1() {
+        System.out.println("\nquestion1");
         final int x = 2;
         switch (x) {
             case 1, 2 -> {
@@ -35,6 +28,7 @@ public class Portuguese20260929 {
 
     // Main 2: same characters, different String objects.
     private static void question2() {
+        System.out.println("\nquestion2");
         final String myStr = "good";
         final char[] myCharArr = {'g', 'o', 'o', 'd'};
         String newStr = "";
@@ -48,6 +42,7 @@ public class Portuguese20260929 {
 
     // Main 3: alternatives 4 and 5 compile. Uncomment the others individually.
     private static void question3() {
+        System.out.println("\nquestion3");
         // for (var i = 5; i = 0; i--) { } // 1: condition is not boolean.
         // var j = 5;
         // for (int i = 0, j += 5; i < j; i++) { j--; } // 2: invalid initializer.
@@ -63,6 +58,7 @@ public class Portuguese20260929 {
 
     // Main 4: valid array forms corresponding to options A, C, D, and F.
     private static void question4() {
+        System.out.println("\nquestion4");
         final int[][] a = {{1, 2}, {1}, {}, {1, 2, 3}};
         final int[][] c = new int[][]{{1, 2, 3}, {4, 5, 6}};
         final int[][] d = {{1, 2}, new int[2]};
@@ -74,6 +70,7 @@ public class Portuguese20260929 {
 
     // Main 5: the backslash suppresses the line break inside the text block.
     private static void question5() {
+        System.out.println("\nquestion5");
         final String str = """
                 0123\
                 4567""";
@@ -83,6 +80,7 @@ public class Portuguese20260929 {
 
     // Intermediate reserve: overload resolution uses the argument's type.
     private static void reserve1() {
+        System.out.println("\nreserve1");
         final int a = 'a';
         final char c = 6;
         overloaded(a);
@@ -99,6 +97,7 @@ public class Portuguese20260929 {
 
     // Difficult reserve: 'c' | 'd' is one constant expression, not two cases.
     private static void reserve2() {
+        System.out.println("\nreserve2");
         final var ca = new char[]{'a', 'b', 'c', 'd'};
         var i = 0;
         for (final var c : ca) {
