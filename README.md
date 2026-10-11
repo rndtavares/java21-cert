@@ -1,6 +1,38 @@
-# Java 21 Certification Study Repository
+# Java Certification Study Repository
 
-This repository contains Java 21 code examples, notes, experiments, and practice-question scratch files for preparing for the **Oracle Certified Professional: Java SE 21 Developer** certification, exam **1Z0-830**.
+This repository contains Java 21 and Java 25 code examples, notes, experiments, and practice-question scratch files for preparing for Oracle Java certifications.
+
+It is a Maven multi-module project:
+
+```text
+java21/  Java 21 examples for 1Z0-830
+java25/  Java 25 delta examples for 1Z0-831
+```
+
+Compile either module from the repository root with:
+
+```bash
+./mvnw -pl java21 compile
+./mvnw -pl java25 compile
+```
+
+## Requirements and Running Examples
+
+- JDK 25 is required to build the complete project. It also compiles the Java 21 module with its Java 21 API and language constraints.
+- Maven does not need to be installed: the committed Maven Wrapper includes its launcher JAR and downloads Maven 3.9.16 on its first execution.
+- In IntelliJ IDEA, assign JDK 21 to `java21-cert` and JDK 25 to `java25-cert`.
+
+Compile and run a class with `main()` from either module:
+
+```bash
+./mvnw -pl java25 compile
+java -cp java25/target/classes dev.ronaldotavares.java25.ScopedValues
+```
+
+```bash
+./mvnw -pl java21 compile
+java -cp java21/target/classes dev.ronaldotavares.java21.weekly.Portuguese20261006
+```
 
 The main goal of this project is practical study: each package focuses on a topic from the certification scope and contains small, runnable examples that make language rules, API behavior, and common exam traps easier to observe directly in code.
 
@@ -20,10 +52,16 @@ I wrote more about the value of this certification in my article: [The Importanc
 
 ## Repository Structure
 
-The code lives mainly under:
+The Java 21 code lives under:
 
 ```text
-src/main/java/dev/ronaldotavares/java21
+java21/src/main/java/dev/ronaldotavares/java21
+```
+
+The Java 25 delta examples live under:
+
+```text
+java25/src/main/java/dev/ronaldotavares/java25
 ```
 
 The packages are organized by certification topic and by study-guide chapter.

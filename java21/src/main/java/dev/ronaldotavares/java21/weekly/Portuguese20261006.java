@@ -112,7 +112,7 @@ public class Portuguese20261006 {
     private static void reserve2() {
         System.out.println("\nreserve2");
         final ColoredPoint point = new ColoredPoint();
-        // test(point, point); // Ambiguous: uncomment to reproduce the compilation error.
+//         test(point, point); // Ambiguous: uncomment to reproduce the compilation error.
         test(point, (Point) point);
         test((Point) point, point);
     }
