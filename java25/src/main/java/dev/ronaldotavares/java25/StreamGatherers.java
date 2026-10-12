@@ -8,9 +8,28 @@ import java.util.stream.Stream;
 public class StreamGatherers {
 
     static void main(String[] args) {
+        examples();
         question1();
         question2();
         question3();
+    }
+
+    private static void examples() {
+        System.out.println("\nexamples");
+        var folded = Stream.of(1, 2, 3)
+                .gather(Gatherers.fold(() -> 0, Integer::sum))
+                .toList();
+        System.out.println("fold: " + folded);
+
+        var scanned = Stream.of(1, 2, 3)
+                .gather(Gatherers.scan(() -> 0, Integer::sum))
+                .toList();
+        System.out.println("scan: " + scanned);
+
+        var slidingWindows = Stream.of("a", "b", "c", "d")
+                .gather(Gatherers.windowSliding(2))
+                .toList();
+        System.out.println("windowSliding: " + slidingWindows);
     }
 
     // windowFixed emits immutable windows and retains an incomplete final window.

@@ -6,10 +6,28 @@ import java.util.NoSuchElementException;
 public class ScopedValues {
 
     private static final ScopedValue<Integer> LEVEL = ScopedValue.newInstance();
+    private static final ScopedValue<String> USER = ScopedValue.newInstance();
 
     static void main(String[] args) throws InterruptedException {
+        examples();
         question1();
         question2();
+    }
+
+    private static void examples() {
+        System.out.println("\nexamples");
+        ScopedValue.where(USER, "ana").run(() ->
+                System.out.println("Bound user: " + USER.get()));
+        System.out.println("Bound after run: " + USER.isBound());
+
+        ScopedValue.where(USER, "outer").run(() -> {
+            ScopedValue.where(USER, "inner").run(() ->
+                    System.out.println("Nested user: " + USER.get()));
+            System.out.println("Restored user: " + USER.get());
+        });
+
+        ScopedValue.where(USER, null).run(() ->
+                System.out.println("Null is bound: " + USER.isBound()));
     }
 
     // Nested bindings shadow the outer binding and end with their dynamic scope.

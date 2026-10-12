@@ -4,8 +4,17 @@ package dev.ronaldotavares.java25;
 public class FlexibleConstructorBodies {
 
     static void main(String[] args) {
+        examples();
         question1();
         question2();
+    }
+
+    private static void examples() {
+        System.out.println("\nexamples");
+        ValidatedTicket validatedTicket = new ValidatedTicket("  JAVA-25  ");
+        System.out.println(validatedTicket.code());
+        InitializedBeforeSuper initializedBeforeSuper = new InitializedBeforeSuper("ready");
+        System.out.println(initializedBeforeSuper.status());
     }
 
     // Validation can run before this(...) as long as it does not access this.
@@ -42,6 +51,52 @@ public class FlexibleConstructorBodies {
 
         private String message() {
             return message;
+        }
+    }
+
+    private static class Parent {
+        private final String status;
+
+        private Parent() {
+            status = describe();
+        }
+
+        String describe() {
+            return "parent";
+        }
+    }
+
+    private static final class InitializedBeforeSuper extends Parent {
+        private final String status;
+
+        private InitializedBeforeSuper(String initialStatus) {
+            status = initialStatus;
+            super();
+        }
+
+        @Override
+        String describe() {
+            return status;
+        }
+
+        private String status() {
+            return status;
+        }
+    }
+
+    private static final class ValidatedTicket {
+        private final String code;
+
+        private ValidatedTicket(String rawCode) {
+            var normalizedCode = rawCode.trim();
+            if (normalizedCode.isEmpty()) {
+                throw new IllegalArgumentException("A ticket needs a code");
+            }
+            this.code = normalizedCode;
+        }
+
+        private String code() {
+            return code;
         }
     }
 
