@@ -36,9 +36,9 @@ public class Portuguese20261124 {
         reserve2();
     }
 
-    // 2.4038 — F: compact constructor transformation, record pattern, fall-through.
+    // F: compact constructor transformation, record pattern, fall-through.
     private static void question1() {
-        System.out.println("\nquestion1 — 2.4038");
+        System.out.println("\nquestion1");
         Student s = new Student(123, null);
         switch(s){
             case Student(var id, var subjects) : System.out.println(s);
@@ -57,9 +57,9 @@ public class Portuguese20261124 {
         }
     }
 
-    // 2.3321 — A: reversed() reverses the complete comparator chain.
+    // A: reversed() reverses the complete comparator chain.
     private static void question2() {
-        System.out.println("\nquestion2 — 2.3321");
+        System.out.println("\nquestion2");
         var books = new ArrayList<Book>(List.of(new Book("The Outsider", "fiction"),
                 new Book("Becoming", "non-fiction"),new Book("Uri", "non-fiction")));
 
@@ -80,10 +80,10 @@ public class Portuguese20261124 {
         public String toString() { return genre + ":" + title; }
     }
 
-    // 2.4018 — D: the French bundle inherits the correctly spelled root key;
+    // D: the French bundle inherits the correctly spelled root key;
     // currency formatting independently uses the default en_GB locale.
     private static void question3() {
-        System.out.println("\nquestion3 — 2.4018");
+        System.out.println("\nquestion3");
         Locale original = Locale.getDefault();
         Locale originalDisplay = Locale.getDefault(Locale.Category.DISPLAY);
         Locale originalFormat = Locale.getDefault(Locale.Category.FORMAT);
@@ -106,10 +106,10 @@ public class Portuguese20261124 {
         System.out.println(message);
     }
 
-    // 2.3756 — D: writing the entire buffer retains 34 on the second iteration.
+    // D: writing the entire buffer retains 34 on the second iteration.
     private static void question4() throws IOException {
-        System.out.println("\nquestion4 — 2.3756");
-        Path directory = Files.createTempDirectory("weekly-3756-");
+        System.out.println("\nquestion4");
+        Path directory = Files.createTempDirectory("weekly-buffer-");
         Path input = directory.resolve("test1.txt");
         Path output = directory.resolve("test2.txt");
         try {
@@ -131,9 +131,9 @@ public class Portuguese20261124 {
         }
     }
 
-    // 2.1009 — B: the field is declared in Super, so Sub is not initialized.
+    // B: the field is declared in Super, so Sub is not initialized.
     private static void question5() {
-        System.out.println("\nquestion5 — 2.1009");
+        System.out.println("\nquestion5");
         System.out.println(Sub.ID);
     }
 
@@ -143,10 +143,10 @@ public class Portuguese20261124 {
         static { System.out.print("In Sub"); }
     }
 
-    // 2.4016 — B. The source explanation's final output block has a typo:
+    // B. The source explanation's final output block has a typo:
     // its second line must be "DvD: DvD playing", not "Media: DvD playing".
     private static void reserve1() {
-        System.out.println("\nreserve1 — 2.4016");
+        System.out.println("\nreserve1");
         Media m = new DvD();
         DvD d = new DvD();
         CD c = new CD();
@@ -179,11 +179,11 @@ public class Portuguese20261124 {
         d.play();
     }
 
-    // 2.4044 — C: defaultReadObject restores id but not transient ld.
+    // C: defaultReadObject restores id but not transient ld.
     private static void reserve2() throws IOException, ClassNotFoundException {
-        System.out.println("\nreserve2 — 2.4044");
+        System.out.println("\nreserve2");
         // Only c:\temp\data.ser is replaced by a portable, temporary path.
-        Path file = Files.createTempFile("weekly-4044-", ".ser");
+        Path file = Files.createTempFile("weekly-data-", ".ser");
         try {
             Data d = new Data(10, LocalDate.of(2024, 10, 10));
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file.toFile()));
